@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+venv/
+.venv/
+build/
+dist/
+*.spec
+
+# Configuración y registros locales
+config.json
+.renombrador_registro.json
+registro_importaciones.csv
