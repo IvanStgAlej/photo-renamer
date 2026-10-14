@@ -11,10 +11,10 @@ import tkinter as tk
 from pathlib import Path
 from tkinter import filedialog, messagebox, ttk
 
-import renombrador as core
+from photo_renamer import core
 
-# Junto al .py, o junto al .exe si está empaquetado con PyInstaller.
-BASE_DIR = Path(sys.executable).parent if getattr(sys, "frozen", False) else Path(__file__).parent
+# En la raíz del proyecto (junto a Iniciar.bat), o junto al .exe si está empaquetado con PyInstaller.
+BASE_DIR = Path(sys.executable).parent if getattr(sys, "frozen", False) else Path(__file__).resolve().parent.parent
 CONFIG_PATH = BASE_DIR / "config.json"
 
 DEFAULT_SOURCE = ""                          # el usuario elige la tarjeta
@@ -322,5 +322,9 @@ class App(tk.Tk):
             pass
 
 
-if __name__ == "__main__":
+def main():
     App().mainloop()
+
+
+if __name__ == "__main__":
+    main()

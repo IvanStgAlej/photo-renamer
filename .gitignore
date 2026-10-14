@@ -10,3 +10,6 @@ dist/
 config.json
 .renombrador_registro.json
 registro_importaciones.csv
+
+# Empaquetado
+*.egg-info/

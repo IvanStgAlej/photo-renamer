@@ -44,11 +44,11 @@ Python 3.10+ · Tkinter (GUI) · [exifread](https://pypi.org/project/ExifRead/) 
 ```bash
 git clone https://github.com/IvanStgAlej/photo-renamer.git
 cd photo-renamer
-pip install -r requirements.txt
-python app.py
+pip install .
+photo-renamer          # or: python -m photo_renamer
 ```
 
-On Windows you can also double-click `Iniciar.bat`, which installs the dependency if needed and starts the app without a console window.
+On Windows you can also double-click `Iniciar.bat`, which installs the dependency if needed and starts the app without a console window, without installing the package.
 
 1. Type your initials and the project or day name (for example, *Viaje Portugal* becomes `viaje-portugal`).
 2. Choose the source (the card, such as `E:\DCIM`; subfolders are scanned) and the destination.
@@ -59,11 +59,20 @@ On Windows you can also double-click `Iniciar.bat`, which installs the dependenc
 
 The code is split into a pure logic module and a thin GUI:
 
-| File | Responsibility |
-|---|---|
-| `renombrador.py` | Scanning the card, reading EXIF, building the plan and executing it. No GUI code; fully testable. |
-| `app.py` | Tkinter interface. The slow work runs in a background thread that reports progress through a `queue.Queue` polled by the UI. |
-| `test_renombrador.py` | Tests that run against a simulated SD card generated in a temp folder. |
+```
+photo-renamer/
+├── photo_renamer/
+│   ├── core.py        # scanning, EXIF, planning and copying (no GUI code, fully testable)
+│   ├── gui.py         # Tkinter interface
+│   └── __main__.py    # entry point for `python -m photo_renamer`
+├── tests/
+│   └── test_core.py   # tests against a simulated SD card in a temp folder
+├── docs/              # screenshot
+├── Iniciar.bat        # double-click launcher for Windows
+└── pyproject.toml
+```
+
+In the GUI, the slow work runs in a background thread that reports progress through a `queue.Queue` polled by the UI.
 
 The import has three steps:
 
@@ -74,8 +83,8 @@ The import has three steps:
 ## Running tests
 
 ```bash
-pip install -r requirements-dev.txt
-python -m unittest test_renombrador -v
+pip install -e ".[dev]"
+python -m unittest discover tests -v
 ```
 
 The tests cover:

@@ -1,4 +1,4 @@
-"""Pruebas con una tarjeta simulada. Ejecutar: python -m unittest test_renombrador"""
+"""Pruebas con una tarjeta simulada. Ejecutar desde la raíz: python -m unittest discover tests"""
 
 import tempfile
 import unittest
@@ -6,7 +6,7 @@ from pathlib import Path
 
 from PIL import Image
 
-import renombrador as core
+from photo_renamer import core
 
 
 def make_photo(path: Path, when: str | None, subsec: str = "00"):

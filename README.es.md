@@ -43,6 +43,6 @@ Con la casilla **Solo renombrar** marcada, se cambia el nombre de las fotos de l
 Las pruebas crean fotos con EXIF usando Pillow:
 
 ```
-pip install -r requirements-dev.txt
-python -m unittest test_renombrador -v
+pip install -e ".[dev]"
+python -m unittest discover tests -v
 ```
